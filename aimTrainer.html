@@ -1,0 +1,166 @@
+<html>
+<head>
+<title> Aim Training </title>
+
+<center>
+<h1> Button Clicker (Reload Page to Restart) </h1>
+<h1> <a href="index.html"/> Go back to index? </a></h1>
+</center>
+
+<h1> <div id="timer" size =  ></div> </h1>
+<br/> <br/> <br/> 
+<script language="javaScript">
+
+var bestTotal
+var firstBestTime
+var counter = 0;
+var counter2 = 0
+var tF
+var clickNum = 0
+var firstTime = [1, 
+				 2, 
+				 3, 
+				 4, 
+				 5,
+				 6,
+				 7,
+				 8,
+				 9,
+				 10,]
+				 
+var timerVar = setInterval(countTimer, 1000);
+var totalSeconds = 0;
+
+function countTimer() 
+	{
+        if (tF == true)
+			{
+				++totalSeconds;
+				var hour = Math.floor(totalSeconds /3600);
+				var minute = Math.floor((totalSeconds - hour*3600)/60);
+				var seconds = totalSeconds - (hour*3600 + minute*60);
+				if(hour < 10)
+				hour = "0"+hour;
+				if(minute < 10)
+				minute = "0"+minute;
+				if(seconds < 10)
+				seconds = "0"+seconds;
+				document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+			}
+		
+	}
+
+function buttonClick() 
+	{
+		tf = false
+		if (clickNum == 0)
+			{
+				after()
+				countTimer()
+				document.getElementById("myDIV").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("myDIV").style.top = Math.random() * window.innerWidth + 'px';
+				tF = true
+				clickNum++
+	
+			}
+	
+		if (clickNum != 0)
+			{
+				after()
+				document.getElementById("myDIV").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("myDIV").style.top = Math.random() * window.innerWidth + 'px';
+	
+			}
+
+	}
+
+function after()
+	{
+		if (counter < 10)
+			{
+				counter++
+			}
+	
+		else if (counter == 10)
+			{
+				alert("Your time was " +totalSeconds)
+			
+				if (counter2 == 0)
+					{
+						firstTime = 1
+						counter2++
+					}
+			
+					counter = 0;
+					clickNum = 0;
+					tF = false
+					bestTime()
+				
+			}
+		
+	}
+
+function bestTime(bestTotal)
+	{	
+		if (firstTime >= 2)
+			{
+				bestTotal = firstBestTime
+				
+				if (totalSeconds > bestTotal)
+					{
+						alert("Your best time is " + bestTotal)
+						firstTime++
+					
+					}
+					
+				else if (totalSeconds < bestTotal)
+					{
+						bestTotal = totalSeconds;
+						alert("Your best time is " + bestTotal)
+						firstTime++
+					
+					}
+				
+				else if (totalSeconds == bestTotal)
+					{
+						bestTotal = totalSeconds;
+						alert("Your best time is " + totalSeconds)
+						firstTime++
+					
+					}
+			} 
+
+		while (firstTime == 1)
+			{	
+				firstBestTime = totalSeconds
+				alert("Your best time is " + totalSeconds)
+				firstTime++
+				
+			}
+		totalSeconds = 0
+		
+	}
+
+</script>
+</head>
+<body>
+<style type=text/css>
+
+#myDIV 
+	{
+    position: absolute;
+    background-color: coral;
+    color: white;
+	
+	}
+
+</style>
+
+<div id="myDIV">
+
+<h1> <button onclick="buttonClick()" > click <br/> here </button> </h1>
+
+</div>
+
+</body>
+</html>

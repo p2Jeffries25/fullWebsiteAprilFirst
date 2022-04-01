@@ -1,0 +1,212 @@
+<html>
+<head>
+<center>
+
+<h2> Welcome to Hamburger Hitter </h2>
+
+</center>
+</head>
+
+<body>
+<script language = "javaScript">
+
+var clipList = ["sounds/splode.mp3", "sounds/happy.mp3", "sounds/sad.mp3",]
+var firstFall = false
+var picList = ["bomb", "bomb2", "hamburger2", "hamburger", ]
+var counter = 0
+var diff;
+var startGame = false    
+var score = 0
+var clickBurger = false
+var clickBomb = false
+var life = 3
+		 
+function buttonPram(easyHard) //works
+	{
+		diff = confirm("Easy or Hard (Ok is Easy, Cancel is Hard)")
+		
+		if (diff == true)
+			{
+				alert("Easy mode - 3 lives")
+				playGame(true)
+				
+			}
+			
+		if (diff == false)
+			{
+				alert("Hard mode - 1 life")
+				playGame(false)
+				
+			}
+			
+	}
+
+function playGame(easyHard) //works
+	{
+		alert("Starting Game")
+		var startGame = true
+		
+		if (easyHard == true)//easy
+			{ 
+				alert("Don't click the bombs!") 
+				
+				if (startGame == true)
+					{
+						burgerEasyHard = true//parameter
+							
+					}
+						
+			}
+			
+		if (easyHard == false)//hard
+			{
+				alert("Don't click the bombs!") 
+				
+				if (startGame == true)
+					{
+						burgerEasyHard = false//parameter
+							
+					}
+					
+			}
+			
+	}
+
+function burgerFall(burgerEasyHard)
+	{
+		if(burgerEasyHard == true) 
+			{
+				document.getElementById("bomb").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("bomb").style.top = Math.random() * window.innerWidth + 'px';
+				
+				document.getElementById("bomb2").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("bomb2").style.top = Math.random() * window.innerWidth + 'px';
+				
+				document.getElementById("hamburger").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("hamburger").style.top = Math.random() * window.innerWidth + 'px';
+				
+				document.getElementById("hamburger2").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("hamburger2").style.top = Math.random() * window.innerWidth + 'px';
+				
+			}
+		
+		else if (burgerEasyHard == false)
+			{
+				
+				document.getElementById("bomb").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("bomb").style.top = Math.random() * window.innerWidth + 'px';
+				
+				document.getElementById("bomb2").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("bomb2").style.top = Math.random() * window.innerWidth + 'px';
+				
+				document.getElementById("hamburger").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("hamburger").style.top = Math.random() * window.innerWidth + 'px';
+				
+				document.getElementById("hamburger2").style.right = Math.random() * window.innerWidth + 'px';
+				document.getElementById("hamburger2").style.top = Math.random() * window.innerWidth + 'px';
+				
+				
+			}
+
+	}
+	
+function bombClick()
+	{
+		clickBomb = true
+		if(clickBomb == true)
+			{
+				if(burgerEasyHard == true)
+					{
+						document.getElementById("player").src = clipList[0]
+						document.getElementById("player").play();
+						
+						alert("-1 life")
+						
+						life = life - 1
+					
+						if(life == 0)
+							{
+								document.getElementById("player").src = clipList[2]
+								document.getElementById("player").play();
+								
+								alert("You dies")
+								alert("Your score is " +score+ " reload page to restart")
+								score = 0
+								
+							}
+							
+					}
+				
+				if(burgerEasyHard == false)
+					{
+						document.getElementById("player").src = clipList[2]
+						document.getElementById("player").play();
+						
+						alert("You dies")
+						clickBomb = false
+						alert("Your score is " +score+ " reload page to restart")
+						life = 3
+						score = 0
+							
+					}
+			
+			}
+			
+	}
+	
+function burgerClick()//works
+	{
+		clickBurger = true
+
+		while(clickBurger == true)
+			{
+				document.getElementById("player").src = clipList[1]
+				document.getElementById("player").play();
+				
+				alert("You click burger! +1 point") 
+				score++
+
+						if(burgerEasyHard == true)
+							{
+								burgerFall(true)
+							
+							}
+						else if(burgerEasyHard == false)
+							{
+								burgerFall(false)
+							
+							}
+				clickBurger = false
+
+			}
+			
+	}
+	
+</script>
+
+</font>
+
+	<input type = "button" value = "Play" onclick = "buttonPram()">
+
+	<div id = "bomb" style = "position: absolute; left:100; top:200;">
+		<img src = "images/bomb1.jpg" onclick = "bombClick()" width="100"/>
+	</div>
+	
+	<div id = "bomb2" style = "position: absolute; left:100; top:200;">
+		<img src = "images/bomb1.jpg" onclick = "bombClick()" width="100"/>
+	</div>
+
+	<div id = "hamburger2" style = "position: absolute; left:200; top:200;">
+		<img src = "images/burger2.png" onclick = "burgerClick()" width="100"/>
+	</div>
+	
+	<div id = "hamburger" style = "position: absolute; left:300; top:200;">
+		<img src = "images/burger1.png" onclick = "burgerClick()" width="100"/>
+	</div>
+
+	<audio id = "player"></audio>
+
+	<h1> <a href="index.html"/> Index </h1>
+
+</body>
+</html>
